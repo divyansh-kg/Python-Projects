@@ -14,9 +14,9 @@ An end-to-end quantitative machine learning pipeline that uses an engineered Ran
 
 ## 🛠️ Technical Workflow & Machine Learning Pipeline
 
-### 1. Feature Engineering
-* Built a robust feature set using time-series indicators extracted via `yfinance`.
-* Applied rolling window calculations including momentum metrics, trend indicators, and structural index volatility baselines.
+### 1. Feature Engineering & Lag Analysis
+* Transformed raw price data into **Percentage Returns (`.pct_change()`)** to normalize historical price scales and evaluate week-over-week performance.
+* Engineered a sequence of **historical return lags (`Lag_1`, `Lag_2`, etc.)** to create a rolling window of recent market history. This allowed the Random Forest to analyze immediate weekly momentum and short-term trends without introducing lookahead bias.
 
 ### 2. Rigorous Evaluation Protocol (No Lookahead Bias)
 * **Chronological Splitting:** Avoided standard random train/test splits, which corrupt time-series data via data leakage. Instead, used absolute chronological slicing to ensure the model only trained on past data to predict future weeks.
